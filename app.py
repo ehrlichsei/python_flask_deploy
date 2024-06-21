@@ -1,4 +1,5 @@
 # app.py
+import os
 from flask import Flask
 
 app = Flask(__name__)
@@ -7,5 +8,8 @@ app = Flask(__name__)
 def hello():
     return 'Hello, World!'
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Heroku will set PORT environment variable
+    port = int(os.environ.get('PORT', 5001))
+    app.run(host='0.0.0.0', port=port, debug=True)
